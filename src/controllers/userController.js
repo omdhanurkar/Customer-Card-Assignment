@@ -80,7 +80,7 @@ const getUser = async function (req, res) {
 const deleteUser = async function (req, res) {
     try {
         let data = req.body
-
+ 
         let tobedeleted = await User.findOneAndUpdate(
             { data, isDeleted: false },
             { $set: { isDeleted: true } },
