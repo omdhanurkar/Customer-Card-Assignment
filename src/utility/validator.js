@@ -7,26 +7,22 @@ const isValid = function (value) {
     return true;
 };
 
-//------------------------------- ObjectId validation --------------------------------------------//
 
 const isValidObjectId = function (ObjectId) {
     return mongoose.Types.ObjectId.isValid(ObjectId);
 
 }
 
-//------------------------------- name regex --------------------------------------------//
 
 const isValidname = function (name) {
     return /^[a-z ,.'-]+$/i.test(name);
 };
-//------------------------------- email regex --------------------------------------------//
 
 const isVAlidEmail = function (email) {
     return (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     ).test(email)
 }
 
-//------------------------------- phone regex --------------------------------------------//
 
 const isValidPhone = function (phone) {
     return (/^[6-9]\d{9}$/).test(phone)
