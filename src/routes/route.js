@@ -10,6 +10,4 @@ router.delete("/deleteUser", deleteUser)
 
 
 
-
-
 module.exports = router
