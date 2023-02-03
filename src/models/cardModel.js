@@ -22,7 +22,7 @@ const cardSchema = new mongoose.Schema({
         enum: ["ACTIVE", "INACTIVE"]
 
     },
-    vision: {
+    vision: { 
         type: String,
         require: true
     },
