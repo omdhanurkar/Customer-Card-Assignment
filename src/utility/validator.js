@@ -18,6 +18,11 @@ const isValidname = function (name) {
     return /^[a-z ,.'-]+$/i.test(name);
 };
 
+const isValidFullname = function (name) {
+    return /^[a-z, ,.'-]+$/i.test(name);
+};
+
+
 const isVAlidEmail = function (email) {
     return (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     ).test(email)
@@ -45,5 +50,6 @@ module.exports = {
     isValidPhone,
     isValidObjectId,
     isValidDOB,
-    isValidStatus
+    isValidStatus,
+    isValidFullname
 }

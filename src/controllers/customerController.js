@@ -1,9 +1,9 @@
-const User = require("../models/userModel");
+const Customer = require("../models/customerModel");
 const check = require("../utility/validator")
 const uuid = require("uuid");
 const uniqeId = uuid.v4()
 
-const createUser = async function (req, res) {
+const createCustomer = async function (req, res) {
     try {
         let data = req.body
         const { firstName, lastName, mobileNumber, DOB, emailID, address, status } = data
@@ -24,7 +24,7 @@ const createUser = async function (req, res) {
             return res.status(400).send({ status: false, message: "mobileNumber is required" });
         if (!check.isValidPhone(mobileNumber))
             return res.status(400).send({ status: false, message: "mobileNumber should be valid" });
-        const checkUsedMobile = await User.findOne({ mobileNumber: mobileNumber });
+        const checkUsedMobile = await Customer.findOne({ mobileNumber: mobileNumber });
         if (checkUsedMobile) {
             return res.status(400).send({ status: false, message: "mobile Number already used" });
         }
@@ -38,7 +38,7 @@ const createUser = async function (req, res) {
             return res.status(400).send({ status: false, message: "emailID is required" });
         if (!(check.isVAlidEmail(emailID)))
             return res.status(400).send({ status: false, message: "emailID should be valid" });
-        const checkusedEmail = await User.findOne({ emailID: emailID });
+        const checkusedEmail = await Customer.findOne({ emailID: emailID });
         if (checkusedEmail) {
             return res.status(400).send({ status: false, message: "email already used" });
         }
@@ -51,10 +51,10 @@ const createUser = async function (req, res) {
         if (!(check.isValidStatus(status)))
             return res.status(400).send({ status: false, message: "status should be ACTIVE or INACTIVE only" });
 
-        const userDetails = { firstName, lastName, mobileNumber, DOB, emailID, address, customerID: uniqeId, status }
+        const customerDetails = { firstName, lastName, mobileNumber, DOB, emailID, address, customerID: uniqeId, status }
 
-        const newUser = await User.create(userDetails);
-        return res.status(201).send({ status: true, message: "User created successfully", data: newUser });
+        const newCustomer = await Customer.create(customerDetails);
+        return res.status(201).send({ status: true, message: "customer created successfully", data: newCustomer });
 
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message })
@@ -63,13 +63,13 @@ const createUser = async function (req, res) {
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-const getUser = async function (req, res) {
+const getCustomer = async function (req, res) {
     try {
-        const activeUser = await User.find({ status: "ACTIVE", isDeleted: false })
-        if (activeUser.length == 0) {
-            return res.status(404).send({ status: false, message: "user not found" })
+        const activeCustomer = await Customer.find({ status: "ACTIVE", isDeleted: false })
+        if (activeCustomer.length == 0) {
+            return res.status(404).send({ status: false, message: "customer not found" })
         }
-        return res.status(200).send({ status: true, message: 'User profile details', data: activeUser })
+        return res.status(200).send({ status: true, message: 'customer profile details', data: activeCustomer })
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message })
     }
@@ -77,25 +77,25 @@ const getUser = async function (req, res) {
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-const deleteUser = async function (req, res) {
+const deleteCustomer = async function (req, res) {
     try {
         let data = req.body
- 
-        let tobedeleted = await User.findOneAndUpdate(
+
+        let tobedeleted = await Customer.findOneAndUpdate(
             { data, isDeleted: false },
             { $set: { isDeleted: true } },
             { new: true })
 
         if (!tobedeleted) {
-            return res.status(404).send({ status: false, message: "user not found" })
+            return res.status(404).send({ status: false, message: "customer not found" })
         }
 
-        return res.status(200).send({ status: true, message: 'User profile details', data: tobedeleted })
+        return res.status(200).send({ status: true, message: 'Customer  deleted successfully' })
 
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message })
     }
 
 }
-  
-module.exports = { createUser, getUser, deleteUser }
+
+module.exports = { createCustomer, getCustomer, deleteCustomer }
