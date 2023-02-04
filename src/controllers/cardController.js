@@ -2,7 +2,7 @@
 const Card = require("../models/cardModel")
 const User = require("../models/customerModel")
 const check = require("../utility/validator")
-
+  
 
 const createCard = async function (req, res) {
     try {
