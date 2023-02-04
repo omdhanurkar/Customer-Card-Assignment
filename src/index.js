@@ -13,7 +13,7 @@ mongoose.connect("mongodb://localhost:27017/card-collection", {
     .then(() => console.log("MongoDb is connected"))
     .catch(err => console.log(err))
 
-app.use('/', route);
+app.use('/', route); 
 
 
 app.listen(3000, () => {
