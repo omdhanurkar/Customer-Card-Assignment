@@ -50,6 +50,6 @@ module.exports = {
     isValidPhone,
     isValidObjectId,
     isValidDOB,
-    isValidStatus,
+    isValidStatus, 
     isValidFullname
 }
