@@ -42,7 +42,7 @@ const createCustomer = async function (req, res) {
         if (checkusedEmail) {
             return res.status(400).send({ status: false, message: "email already used" });
         }
-
+  
         if (!(address))
             return res.status(400).send({ status: false, message: "address is required" });
 
