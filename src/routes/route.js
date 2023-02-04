@@ -10,7 +10,7 @@ router.delete("/deleteCustomer", deleteCustomer)
 
 router.post("/createCard", createCard)
 router.get("/getAllCardList", getAllCardList)
-
+ 
 
 
 
